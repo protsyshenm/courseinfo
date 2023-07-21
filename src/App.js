@@ -17,15 +17,17 @@ const App = () => {
         name: 'State of a component',
         exercises: 14,
         id: 3
+      }, 
+      {
+        name: 'Redux',
+        exercises: 11,
+        id: 4
       }
     ]
   } 
 
-  return (
-    <div>
-      <Course course={course}/>
-    </div>
-  )
+  return <Course course={course}/>
+
 }
 
 const Course = ({ course }) => {
@@ -33,15 +35,12 @@ const Course = ({ course }) => {
     <div>
       <Header name={course.name} />
       <Content parts={course.parts} />
+      <Total parts={course.parts} />
     </div>
   )
 }
 
-const Header = ({ name }) => {
-  return (
-    <h1>{name}</h1>
-  )
-}
+const Header = ({ name }) => <h1>{name}</h1>
 
 const Content = ({ parts }) => {
   return (
@@ -51,9 +50,15 @@ const Content = ({ parts }) => {
   )
 }
 
-const Part = (props) => {
+const Part = ({ name, exercises }) => <p>{name} {exercises}</p>
+
+const Total = (props) => {
+  let totalExercises = 0;
+  props.parts.forEach(part => {
+    totalExercises += part.exercises
+  })
   return (
-    <p>{props.name} {props.exercises}</p>
+    <p><b>total of {totalExercises} exercises</b></p>
   )
 }
 
