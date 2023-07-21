@@ -52,13 +52,9 @@ const Content = ({ parts }) => {
 
 const Part = ({ name, exercises }) => <p>{name} {exercises}</p>
 
-const Total = (props) => {
-  let totalExercises = 0;
-  props.parts.forEach(part => {
-    totalExercises += part.exercises
-  })
+const Total = ({ parts }) => {
   return (
-    <p><b>total of {totalExercises} exercises</b></p>
+    <p><b>total of {parts.reduce((acc, item) => acc += item.exercises, 0)} exercises</b></p>
   )
 }
 
